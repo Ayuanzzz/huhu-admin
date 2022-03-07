@@ -11,3 +11,8 @@ declare module '*.vue' {
 interface Window {
 	nextLoading: boolean;
 }
+
+//让ts不拦截mockjs
+declare module 'mockjs';
+
+declare function define(...args: any[]): any;
