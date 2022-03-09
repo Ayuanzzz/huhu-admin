@@ -3,7 +3,7 @@
 		<el-card shadow="hover">
 			<!-- 查询 -->
 			<div class="system-menu-search mb15">
-				<el-input size="small" placeholder="请输入菜单名称" style="max-width: 180px"> </el-input>
+				<el-input size="small" placeholder="请输入项目名称" style="max-width: 180px"> </el-input>
 				<el-button size="small" type="primary" class="ml10">
 					<el-icon>
 						<elementSearch />
@@ -14,7 +14,7 @@
 					<el-icon>
 						<elementFolderAdd />
 					</el-icon>
-					新增菜单
+					新增项目
 				</el-button>
 			</div>
 			<!-- 列表 -->
@@ -45,117 +45,110 @@
 				<el-table-column label="操作" show-overflow-tooltip width="140">
 					<template v-slot="{ row, $index }">
 						<el-button size="mini" type="text" @click="onOpenEditItem(row)">修改</el-button>
-						<el-button size="mini" type="text" @click="onTabelRowDel(row, $index)">删除</el-button>
+						<el-button size="mini" type="text" @click="delData(row, $index)">删除</el-button>
 					</template>
 				</el-table-column>
 			</el-table>
+			<el-pagination
+				@size-change="onHandleSizeChange"
+				@current-change="onHandleCurrentChange"
+				class="mt15"
+				:pager-count="5"
+				:page-sizes="[10, 20, 30]"
+				v-model:current-page="pageNum"
+				background
+				v-model:page-size="pageSize"
+				layout="total, sizes, prev, pager, next, jumper"
+				:total="total"
+			>
+			</el-pagination>
 		</el-card>
 		<AddItem ref="addItemRef" :addDoingData="addDoingData" :employeeList="employeeList" />
-		<EditItem ref="editItemRef" :Data="temp" @editData="receiveEditData" />
+		<EditItem ref="editItemRef" :changeData="changeData" :employeeList="employeeList" :updateData="updateData" />
 	</div>
 </template>
 
 <script lang="ts">
 import { getDoing, getEmployee } from '/@/http/mockData';
-import { DoingData } from '/@/types/items';
-import { ref, reactive, toRefs, watch, isReactive, onMounted } from 'vue';
+import { DoingData, InitData } from '/@/types/items';
+import { ref, reactive, toRefs, onMounted } from 'vue';
 import { formatEmployeeData } from '/@/utils/items';
-import { formatDate } from '/@/utils/formatTime';
 import AddItem from '/@/views/items/doing/components/addItem.vue';
-import EditItem from '/@/views/items/doing/components/edititem.vue';
+import EditItem from '/@/views/items/doing/components/editItem.vue';
 export default {
 	name: 'doing',
 	components: { AddItem, EditItem },
-	setup(props) {
-		const state = reactive<{ doingDatas: DoingData[]; employeeList: string[] }>({
-			doingDatas: [],
-			employeeList: [],
-		});
-		const showAddItem = ref(false);
+	setup() {
+		//项目数据
+		const state = reactive(new InitData());
+		//初始化数据
+		const initData = () => {
+			(state.pageNum = 0), (state.pageSize = 10);
+		};
 		//打开新增项目弹窗
 		const addItemRef = ref();
 		const openAddItem = () => {
 			addItemRef.value.openDialog();
 		};
 		//添加数据
-		const addDoingData = (doingData) => {
+		const addDoingData = (doingData: DoingData) => {
 			state.doingDatas.unshift(doingData);
 		};
-		//**********************************************************
-		//接受新增组件数据
-		// const receiveAddData = (value) => {
-		// 	console.log(value);
-		// 	let index = parseInt(formatDate(new Date(), 'YYYYmmddHHMMSS') + 0);
-		// 	singleData.id = index;
-		// 	singleData.itemName = value.name;
-		// 	singleData.employees = value.employees.length > 1 ? `${value.employees[0]}+${value.employees.length - 1}` : value.employees[0];
-		// 	singleData.employeeList = value.employees;
-		// 	//格式化员工数据
-		// 	for (const element of value.employees) {
-		// 		const employee = {
-		// 			joinTime: '',
-		// 			name: '',
-		// 		};
-		// 		employee.joinTime = value.startTime;
-		// 		employee.name = element;
-		// 		singleData.employeeData.push(employee);
-		// 	}
-		// 	singleData.deadline = value.deadline;
-		// 	singleData.startTime = value.startTime;
-		// 	testData.unshift(singleData);
-		// 	//清空数组
-		// 	singleData = { id: 0, itemName: '', employees: '', employeeData: [], percentage: 0, deadline: '', startTime: '' };
-		// };
-
 		//删除数据
-		// const onTabelRowDel = (row, index) => {
-		// 	testData.splice(index, 1);
-		// };
-		//修改数据
-		const editItemRef = ref();
-		const selectData = reactive({
-			obj: {},
-		});
-		const temp = ref({});
-		const onOpenEditItem = (row, index) => {
-			editItemRef.value.openDialog();
-			// selectData.obj = row;
-			//深拷贝数据
-			temp.value = Object.assign({}, row);
+		const delData = (row: any, index: number) => {
+			state.doingDatas.splice(index, 1);
 		};
-		//接受修改组件数据
-		const receiveEditData = (value) => {
-			console.log('receiveEditData', value);
-			console.log('testData---', testData);
-
-			// 格式化员工数据
+		//打开修改项目弹窗
+		const editItemRef = ref();
+		let indexRef: number = 0;
+		const onOpenEditItem = (row: any, index: number) => {
+			indexRef = index;
+			state.changeData = { ...row };
+			editItemRef.value.openDialog();
+		};
+		//更新数据
+		const updateData = (data: DoingData, index: number = indexRef) => {
+			state.doingDatas.splice(index, 1, data);
+		};
+		// 分页改变
+		const onHandleSizeChange = (val: number) => {
+			state.pageSize = val;
+		};
+		// 分页改变
+		const onHandleCurrentChange = (val: number) => {
+			state.pageNum = val;
 		};
 		onMounted(() => {
-			//接受项目数据
-			getDoing({}).then((res) => {
+			//初始化
+			initData();
+			//接收项目数据
+			getDoing({}).then((res: any) => {
 				const data = res.doingData;
 				//处理mock数据
 				for (let i in data) {
 					state.doingDatas[i] = { ...data[i] };
 					state.doingDatas[i].employeeStr = formatEmployeeData(data[i].employeeData);
+					state.total = data.length;
+					console.log(state.total);
 				}
 			});
-			//接受员工数据
-			getEmployee({}).then((res) => {
+			//接收员工数据
+			getEmployee({}).then((res: any) => {
 				state.employeeList = res.employeeList;
 			});
 		});
 		return {
-			showAddItem,
-			openAddItem,
 			addItemRef,
-			addDoingData,
-			...toRefs(state),
 			editItemRef,
-			selectData,
-			temp,
+			initData,
+			updateData,
+			openAddItem,
+			addDoingData,
+			delData,
 			onOpenEditItem,
-			receiveEditData,
+			onHandleSizeChange,
+			onHandleCurrentChange,
+			...toRefs(state),
 		};
 	},
 };

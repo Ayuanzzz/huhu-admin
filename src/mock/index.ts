@@ -34,9 +34,10 @@ const nameArr = [
 	'顾刚',
 ];
 
+//进行中项目
 //正则匹配各种url请求
 Mock.mock(/\/mock\/Doing.*/, 'get', {
-	'doingData|1-10': [
+	'doingData|5-7': [
 		{
 			itemName: '@csentence(5, 15)',
 			'employeeData|2-10': [
@@ -53,6 +54,25 @@ Mock.mock(/\/mock\/Doing.*/, 'get', {
 	],
 });
 
+//进行中项目员工名字
 Mock.mock('/mock/Employee', 'get', {
 	employeeList: nameArr,
+});
+
+//已完成项目
+Mock.mock(/\/mock\/Done.*/, 'get', {
+	'doneData|5-7': [
+		{
+			itemName: '@csentence(5, 15)',
+			'employeeData|2-10': [
+				{
+					joinTime: '@date()',
+					'name|1': nameArr,
+				},
+			],
+			endTime: '@date()',
+			startTime: '@date()',
+			status: 'done',
+		},
+	],
 });

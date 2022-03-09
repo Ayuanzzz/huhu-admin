@@ -55,11 +55,16 @@ export default {
 			},
 		});
 		const time = ref('');
-		const options = ref([]);
 		//定义弹窗状态
 		const isShowDialog = ref(false);
 		//打开弹窗
 		const openDialog = () => {
+			//清空数据
+			state.itemForm = {
+				itemName: '',
+				deadline: '',
+				employeeList: [],
+			};
 			isShowDialog.value = true;
 		};
 		//关闭弹窗
@@ -96,12 +101,7 @@ export default {
 				status: 'doing',
 			};
 			props.addDoingData(doingData);
-			//清空数据
-			state.itemForm = {
-				itemName: '',
-				deadline: '',
-				employeeList: [],
-			};
+
 			//关闭弹窗
 			closeDialog();
 		};
@@ -112,7 +112,6 @@ export default {
 
 		return {
 			time,
-			options,
 			isShowDialog,
 			openDialog,
 			closeDialog,

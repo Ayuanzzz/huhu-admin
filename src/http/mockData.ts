@@ -16,6 +16,14 @@ export function getEmployee(data: any): any {
 	});
 }
 
+export function getDone(data: any): any {
+	return $http({
+		url: '/Done',
+		method: 'get',
+		params: data,
+	});
+}
+
 export function postJob(): any {
 	return $http({
 		url: '/Job',
