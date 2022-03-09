@@ -642,21 +642,7 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 							icon: 'elementSetUp',
 						},
 					},
-					{
-						path: '/pages/cityLinkage',
-						name: 'pagesCityLinkage',
-						component: () => import('/@/views/pages/cityLinkage/index.vue'),
-						meta: {
-							title: 'message.router.pagesCityLinkage',
-							isLink: '',
-							isHide: false,
-							isKeepAlive: true,
-							isAffix: false,
-							isIframe: false,
-							roles: ['admin', 'common'],
-							icon: 'iconfont icon-jiliandongxuanzeqi',
-						},
-					},
+
 					{
 						path: '/pages/formAdapt',
 						name: 'pagesFormAdapt',
@@ -1039,26 +1025,6 @@ export const staticRoutes: Array<RouteRecordRaw> = [
 		component: () => import('/@/views/error/401.vue'),
 		meta: {
 			title: 'message.staticRoutes.noPower',
-		},
-	},
-	/**
-	 * 提示：写在这里的为全屏界面，不建议写在这里
-	 * 请写在 `dynamicRoutes` 路由数组中
-	 */
-	{
-		path: '/visualizingDemo1',
-		name: 'visualizingDemo1',
-		component: () => import('/@/views/visualizing/demo1.vue'),
-		meta: {
-			title: 'message.router.visualizingLinkDemo1',
-		},
-	},
-	{
-		path: '/visualizingDemo2',
-		name: 'visualizingDemo2',
-		component: () => import('/@/views/visualizing/demo2.vue'),
-		meta: {
-			title: 'message.router.visualizingLinkDemo2',
 		},
 	},
 ];
