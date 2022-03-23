@@ -30,9 +30,6 @@
 				<elementSearch />
 			</el-icon>
 		</div>
-		<div class="layout-navbars-breadcrumb-user-icon" @click="onLayoutSetingClick">
-			<i class="icon-skin iconfont" :title="$t('message.user.title3')"></i>
-		</div>
 		<div class="layout-navbars-breadcrumb-user-icon">
 			<el-popover placement="bottom" trigger="click" v-model:visible="isShowUserNewsPopover" :width="300" popper-class="el-popover-pupop-user-news">
 				<template #reference>
@@ -66,9 +63,6 @@
 				<el-dropdown-menu>
 					<el-dropdown-item command="/home">{{ $t('message.user.dropdown1') }}</el-dropdown-item>
 					<el-dropdown-item command="wareHouse">{{ $t('message.user.dropdown6') }}</el-dropdown-item>
-					<el-dropdown-item command="/personal">{{ $t('message.user.dropdown2') }}</el-dropdown-item>
-					<el-dropdown-item command="/404">{{ $t('message.user.dropdown3') }}</el-dropdown-item>
-					<el-dropdown-item command="/401">{{ $t('message.user.dropdown4') }}</el-dropdown-item>
 					<el-dropdown-item divided command="logOut">{{ $t('message.user.dropdown5') }}</el-dropdown-item>
 				</el-dropdown-menu>
 			</template>
@@ -132,10 +126,6 @@ export default {
 				else state.isScreenfull = false;
 			});
 		};
-		// 布局配置 icon 点击时
-		const onLayoutSetingClick = () => {
-			proxy.mittBus.emit('openSetingsDrawer');
-		};
 		// 下拉菜单点击时
 		const onHandleCommandClick = (path: string) => {
 			if (path === 'logOut') {
@@ -172,7 +162,7 @@ export default {
 					})
 					.catch(() => {});
 			} else if (path === 'wareHouse') {
-				window.open('https://gitee.com/lyt-top/vue-next-admin');
+				window.open('https://github.com/Ayuanzzz/huhu-admin');
 			} else {
 				router.push(path);
 			}
@@ -246,7 +236,6 @@ export default {
 		});
 		return {
 			getUserInfos,
-			onLayoutSetingClick,
 			onHandleCommandClick,
 			onScreenfullClick,
 			onSearchClick,

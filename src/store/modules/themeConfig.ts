@@ -104,8 +104,6 @@ const themeConfigModule: Module<ThemeConfigState, RootStateTypes> = {
 			isIsDark: false,
 			// 是否开启水印
 			isWartermark: false,
-			// 水印文案
-			wartermarkText: 'small@小柒',
 
 			/**
 			 * 其它设置
@@ -138,9 +136,9 @@ const themeConfigModule: Module<ThemeConfigState, RootStateTypes> = {
 			 * 全局网站标题 / 副标题
 			 */
 			// 网站主标题（菜单导航、浏览器当前网页标题）
-			globalTitle: 'vue-next-admin',
-			// 网站副标题（登录页顶部文字）
-			globalViceTitle: 'SMALL@小柒',
+			globalTitle: 'Vue3-Study',
+			//网站副标题
+			littleTitle: 'Vue3+TypeScript+Vite',
 			// 默认初始语言，可选值"<zh-cn|en|zh-tw>"，默认 zh-cn
 			globalI18n: 'zh-cn',
 			// 默认全局组件大小，可选值"<|medium|small|mini>"，默认 ''

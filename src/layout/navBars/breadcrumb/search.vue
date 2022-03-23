@@ -58,6 +58,7 @@ export default defineComponent({
 		// 菜单搜索数据过滤
 		const menuSearch = (queryString: any, cb: any) => {
 			let results = queryString ? state.tagsViewList.filter(createFilter(queryString)) : state.tagsViewList;
+
 			cb(results);
 		};
 		// 菜单搜索过滤

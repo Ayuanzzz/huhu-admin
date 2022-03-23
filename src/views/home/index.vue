@@ -10,7 +10,7 @@
 								<div class="home-card-first-right-title">
 									{{ currentTime }}，{{ getUserInfos.userName === '' ? 'test' : getUserInfos.userName }}！
 								</div>
-								<div class="home-card-first-right-msg mt5">{{ getUserInfos.userName === 'admin' ? '超级管理' : '普通用户' }}</div>
+								<div class="home-card-first-right-msg mt5">{{ getUserInfos.userName === 'admin' ? '管理员' : '员工' }}</div>
 							</div>
 						</div>
 					</div>
@@ -115,17 +115,17 @@ export default {
 				data: [
 					{
 						date: '2016-05-02',
-						name: '1号实验室',
+						name: '呼呼之家',
 						address: '烟感2.1%OBS/M',
 					},
 					{
 						date: '2016-05-04',
-						name: '2号实验室',
+						name: '蛙蛙之家',
 						address: '温度30℃',
 					},
 					{
 						date: '2016-05-01',
-						name: '3号实验室',
+						name: '鸡鸡之家',
 						address: '湿度57%RH',
 					},
 				],

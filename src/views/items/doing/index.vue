@@ -129,7 +129,6 @@ export default {
 					state.doingDatas[i] = { ...data[i] };
 					state.doingDatas[i].employeeStr = formatEmployeeData(data[i].employeeData);
 					state.total = data.length;
-					console.log(state.total);
 				}
 			});
 			//接收员工数据

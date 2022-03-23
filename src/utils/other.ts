@@ -31,7 +31,7 @@ export function useTitle() {
 		router.currentRoute.value.path === '/login'
 			? (webTitle = router.currentRoute.value.meta.title as any)
 			: (webTitle = i18n.global.t(router.currentRoute.value.meta.title as any));
-		document.title = `${webTitle} - ${globalTitle}` || globalTitle;
+		document.title = `${webTitle} · ${globalTitle}` || globalTitle;
 	});
 }
 
@@ -64,7 +64,6 @@ export const lazyImg = (el: any, arr: any) => {
  * @returns 返回 `window.localStorage` 中读取的缓存值 `globalComponentSize`
  */
 export const globalComponentSize: string = Local.get('themeConfig')?.globalComponentSize || store.state.themeConfig.themeConfig?.globalComponentSize;
-
 
 /**
  * 对象深克隆

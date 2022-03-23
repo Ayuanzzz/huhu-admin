@@ -1,12 +1,22 @@
 <template>
-	<div class="login-container">
+	<div
+		class="login-container"
+		:style="{
+			// backgroundImage: pcLayout ? 'url(' + pcBgi + ')' : mbBgi,
+			background: pcLayout ? 'url(' + pcBgi + ') center center/100% no-repeat ' : mbBgi,
+		}"
+	>
 		<div class="login-logo">
 			<span>{{ getThemeConfig.globalViceTitle }}</span>
 		</div>
-		<div class="login-content">
+		<div
+			class="login-content"
+			:style="{ transform: pcLayout ? 'translate(0%, -50%) translate3d(0, 0, 0)' : 'translate(-50%, -50%) translate3d(0, 0, 0)' }"
+		>
 			<div class="login-content-main">
-				<h4 class="login-content-title">{{ getThemeConfig.globalTitle }}后台模板</h4>
-				<div v-if="!isScan">
+				<h4 class="login-content-title">{{ getThemeConfig.globalTitle }}</h4>
+				<p class="login-content-littleTitle">{{ getThemeConfig.littleTitle }}</p>
+				<div>
 					<el-tabs v-model="tabsActiveName">
 						<el-tab-pane :label="$t('message.label.one1')" name="account">
 							<Account />
@@ -16,41 +26,54 @@
 						</el-tab-pane>
 					</el-tabs>
 				</div>
-				<Scan v-if="isScan" />
-				<div class="login-content-main-sacn" @click="isScan = !isScan">
-					<i class="iconfont" :class="isScan ? 'icon-diannao1' : 'icon-barcode-qr'"></i>
-					<div class="login-content-main-sacn-delta"></div>
-				</div>
 			</div>
-		</div>
-		<div class="login-copyright">
-			<div class="mb5 login-copyright-company">{{ $t('message.copyright.one5') }}</div>
-			<div class="login-copyright-msg">{{ $t('message.copyright.two6') }}</div>
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import { toRefs, reactive, computed } from 'vue';
+import { toRefs, reactive, computed, watch, onMounted, ref } from 'vue';
 import Account from '/@/views/login/component/account.vue';
 import Mobile from '/@/views/login/component/mobile.vue';
-import Scan from '/@/views/login/component/scan.vue';
 import { useStore } from '/@/store/index';
 export default {
 	name: 'loginIndex',
-	components: { Account, Mobile, Scan },
+	components: { Account, Mobile },
 	setup() {
 		const store = useStore();
 		const state = reactive({
 			tabsActiveName: 'account',
 			isTabPaneShow: true,
-			isScan: false,
+			pcLayout: true,
+			pcBgi: 'https://gitee.com/sugarpeter/images/raw/master/bg1.jpg',
+			mbBgi: 'rgba(255, 255, 255, 0.99)',
 		});
+		const clientWidth = ref(document.body.clientWidth);
 		// 获取布局配置信息
 		const getThemeConfig = computed(() => {
 			return store.state.themeConfig.themeConfig;
 		});
+		watch(clientWidth, () => {
+			if (clientWidth.value <= 1000) {
+				state.pcLayout = false;
+			} else {
+				state.pcLayout = true;
+			}
+		});
+		onMounted(() => {
+			window.onresize = () => {
+				return (() => {
+					clientWidth.value = document.body.clientWidth;
+				})();
+			};
+
+			// 判断是否为手机端
+			if (clientWidth.value <= 1000) {
+				state.pcLayout = false;
+			}
+		});
 		return {
+			clientWidth,
 			getThemeConfig,
 			...toRefs(state),
 		};
@@ -62,8 +85,8 @@ export default {
 .login-container {
 	width: 100%;
 	height: 100%;
-	background: url('https://gitee.com/lyt-top/vue-next-admin-images/raw/master/login/bg-login.png') no-repeat;
-	background-size: 100% 100%;
+	background-size: 100%;
+	// background: center center no-repeat;
 	.login-logo {
 		position: absolute;
 		top: 30px;
@@ -83,10 +106,7 @@ export default {
 		position: absolute;
 		top: 50%;
 		left: 50%;
-		transform: translate(-50%, -50%) translate3d(0, 0, 0);
 		background-color: rgba(255, 255, 255, 0.99);
-		border: 5px solid var(--color-primary-light-8);
-		border-radius: 4px;
 		transition: all 0.3s ease;
 		overflow: hidden;
 		z-index: 1;
@@ -96,65 +116,24 @@ export default {
 			.login-content-title {
 				color: #333;
 				font-weight: 500;
-				font-size: 22px;
+				font-size: 30px;
 				text-align: center;
 				letter-spacing: 4px;
-				margin: 15px 0 30px;
+				margin: 15px 0 15px;
 				white-space: nowrap;
 				z-index: 5;
 				position: relative;
 				transition: all 0.3s ease;
 			}
-		}
-		.login-content-main-sacn {
-			position: absolute;
-			top: 0;
-			right: 0;
-			width: 50px;
-			height: 50px;
-			overflow: hidden;
-			cursor: pointer;
-			transition: all ease 0.3s;
-			&-delta {
-				position: absolute;
-				width: 35px;
-				height: 70px;
-				z-index: 2;
-				top: 2px;
-				right: 21px;
-				background: var(--el-color-white);
-				transform: rotate(-45deg);
+			.login-content-littleTitle {
+				color: #333;
+				font-weight: 300;
+				font-size: 15px;
+				text-align: center;
+				letter-spacing: 1.5px;
+				margin: 0 0 20px;
+				position: relative;
 			}
-			&:hover {
-				opacity: 1;
-				transition: all ease 0.3s;
-				color: var(--color-primary);
-			}
-			i {
-				width: 47px;
-				height: 50px;
-				display: inline-block;
-				font-size: 48px;
-				position: absolute;
-				right: 2px;
-				top: -1px;
-			}
-		}
-	}
-	.login-copyright {
-		position: absolute;
-		left: 50%;
-		transform: translateX(-50%);
-		bottom: 30px;
-		text-align: center;
-		color: var(--color-whites);
-		font-size: 12px;
-		opacity: 0.8;
-		.login-copyright-company {
-			white-space: nowrap;
-		}
-		.login-copyright-msg {
-			@extend .login-copyright-company;
 		}
 	}
 }

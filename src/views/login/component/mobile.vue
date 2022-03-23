@@ -17,7 +17,7 @@
 					</el-input>
 				</el-col>
 				<el-col :span="8">
-					<el-button class="login-content-code">{{ $t('message.mobile.codeText') }}</el-button>
+					<el-button class="login-content-code" @click="test">{{ $t('message.mobile.codeText') }}</el-button>
 				</el-col>
 			</el-row>
 		</el-form-item>
@@ -26,15 +26,12 @@
 				<span>{{ $t('message.mobile.btnText') }}</span>
 			</el-button>
 		</el-form-item>
-		<el-form-item class="login-animation-four">
-			<el-button type="text" size="small">{{ $t('message.link.one3') }}</el-button>
-			<el-button type="text" size="small">{{ $t('message.link.two4') }}</el-button>
-		</el-form-item>
 	</el-form>
 </template>
 
 <script lang="ts">
 import { toRefs, reactive, defineComponent } from 'vue';
+import { ElMessage } from 'element-plus';
 export default defineComponent({
 	name: 'loginMobile',
 	setup() {
@@ -44,7 +41,11 @@ export default defineComponent({
 				code: '',
 			},
 		});
+		const test = () => {
+			ElMessage('仅测试用');
+		};
 		return {
+			test,
 			...toRefs(state),
 		};
 	},
@@ -84,7 +85,7 @@ export default defineComponent({
 	.login-content-submit {
 		width: 100%;
 		letter-spacing: 2px;
-		font-weight: 300;
+		font-weight: 500;
 		margin-top: 15px;
 	}
 }

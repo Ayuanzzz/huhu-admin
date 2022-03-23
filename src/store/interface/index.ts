@@ -48,6 +48,7 @@ export interface ThemeConfigState {
 		layout: string;
 		isRequestRoutes: boolean;
 		globalTitle: string;
+		littleTitle: string;
 		globalViceTitle: string;
 		globalI18n: string;
 		globalComponentSize: string;
@@ -58,7 +59,7 @@ export interface ThemeConfigState {
 export interface RoutesListState {
 	routesList: Array<object>;
 	isColumnsMenuHover: Boolean;
-	isColumnsNavHover: Boolean;
+	isColumnsNavHover: boolean;
 }
 
 // 路由缓存列表

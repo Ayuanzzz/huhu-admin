@@ -143,6 +143,8 @@ export default {
 			});
 			proxy.mittBus.on('layoutMobileResize', (res: any) => {
 				initMenuFixed(res.clientWidth);
+				console.log(res.clientWidth);
+
 				closeLayoutAsideMobileMode();
 			});
 		});

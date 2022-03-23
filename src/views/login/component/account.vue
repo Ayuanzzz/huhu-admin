@@ -27,37 +27,10 @@
 				</template>
 			</el-input>
 		</el-form-item>
-		<el-form-item class="login-animation-three">
-			<el-row :gutter="15">
-				<el-col :span="16">
-					<el-input
-						type="text"
-						maxlength="4"
-						:placeholder="$t('message.account.accountPlaceholder3')"
-						v-model="ruleForm.code"
-						clearable
-						autocomplete="off"
-					>
-						<template #prefix>
-							<el-icon class="el-input__icon"><elementPosition /></el-icon>
-						</template>
-					</el-input>
-				</el-col>
-				<el-col :span="8">
-					<div class="login-content-code">
-						<span class="login-content-code-img">1234</span>
-					</div>
-				</el-col>
-			</el-row>
-		</el-form-item>
 		<el-form-item class="login-animation-four">
 			<el-button type="primary" class="login-content-submit" round @click="onSignIn" :loading="loading.signIn">
 				<span>{{ $t('message.account.accountBtnText') }}</span>
 			</el-button>
-		</el-form-item>
-		<el-form-item class="login-animation-five">
-			<el-button type="text" size="small">{{ $t('message.link.one3') }}</el-button>
-			<el-button type="text" size="small">{{ $t('message.link.two4') }}</el-button>
 		</el-form-item>
 	</el-form>
 </template>
@@ -85,7 +58,6 @@ export default defineComponent({
 			ruleForm: {
 				userName: 'admin',
 				password: '123456',
-				code: '1234',
 			},
 			loading: {
 				signIn: false,
@@ -122,8 +94,8 @@ export default defineComponent({
 				userName: state.ruleForm.userName,
 				photo:
 					state.ruleForm.userName === 'admin'
-						? 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1813762643,1914315241&fm=26&gp=0.jpg'
-						: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=317673774,2961727727&fm=26&gp=0.jpg',
+						? 'https://gitee.com/sugarpeter/images/raw/master/bear.gif'
+						: 'https://gitee.com/sugarpeter/images/raw/master/rabbit.gif',
 				time: new Date().getTime(),
 				roles: defaultRoles,
 				authBtnList: defaultAuthBtnList,
@@ -246,7 +218,7 @@ export default defineComponent({
 	.login-content-submit {
 		width: 100%;
 		letter-spacing: 2px;
-		font-weight: 300;
+		font-weight: 500;
 		margin-top: 15px;
 	}
 }
