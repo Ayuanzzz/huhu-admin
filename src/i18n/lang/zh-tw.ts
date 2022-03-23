@@ -2,6 +2,9 @@
 export default {
 	router: {
 		home: '首頁',
+		items: '项目管理',
+		doing: '进行中',
+		done: '已完成',
 		system: '系統設置',
 		systemMenu: '選單管理',
 		systemRole: '角色管理',

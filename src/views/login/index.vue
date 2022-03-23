@@ -62,9 +62,7 @@ export default {
 		});
 		onMounted(() => {
 			window.onresize = () => {
-				return (() => {
-					clientWidth.value = document.body.clientWidth;
-				})();
+				clientWidth.value = document.body.clientWidth;
 			};
 
 			// 判断是否为手机端

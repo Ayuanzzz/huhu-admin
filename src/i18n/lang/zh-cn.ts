@@ -2,6 +2,9 @@
 export default {
 	router: {
 		home: '首页',
+		items: '项目管理',
+		doing: '进行中',
+		done: '已完成',
 		system: '系统设置',
 		systemMenu: '菜单管理',
 		systemRole: '角色管理',
@@ -72,10 +75,6 @@ export default {
 		tools: '工具类集合',
 		layoutLinkView: '外链',
 		layoutIfameView: '内嵌 iframe',
-		items: '项目管理',
-		plan: '计划',
-		doing: '进行中',
-		done: '已完成',
 		employee: '员工管理',
 	},
 	staticRoutes: {

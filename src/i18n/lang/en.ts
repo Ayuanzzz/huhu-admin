@@ -2,6 +2,9 @@
 export default {
 	router: {
 		home: 'home',
+		items: 'items',
+		doing: 'doing',
+		done: 'done',
 		system: 'system',
 		systemMenu: 'systemMenu',
 		systemRole: 'systemRole',

@@ -59,7 +59,7 @@ const themeConfigModule: Module<ThemeConfigState, RootStateTypes> = {
 			 * 界面设置
 			 */
 			// 是否开启菜单水平折叠效果
-			isCollapse: false,
+			isCollapse: true,
 			// 是否开启菜单手风琴效果
 			isUniqueOpened: false,
 			// 是否开启固定 Header
