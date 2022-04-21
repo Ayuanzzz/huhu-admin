@@ -15,11 +15,12 @@ cd dist
 git init
 git add -A
 git commit -m 'deploy-huhu'
+git branch -m master main
 
 # 如果你要部署在 https://<USERNAME>.github.io
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git main
 
 #如果你要部署在 https://<USERNAME>.github.io/<REPO>
-git push -f git@github.com:Ayuanzzz/huhu-admin.git main:gh-pages
+git push -f git@github.com:Ayuanzzz/huhu-admin.git main:show-pages
 
 cd -

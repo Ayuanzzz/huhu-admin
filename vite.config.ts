@@ -31,7 +31,7 @@ const viteConfig: UserConfig = {
 				target: 'https://gitee.com',
 				ws: true,
 				changeOrigin: true,
-				rewrite: (path) => path.replace(/^\/gitee/, ''),
+				// rewrite: (path) => path.replace(/^\/gitee/, ''),
 			},
 		},
 	},

@@ -45,7 +45,8 @@ export default {
 			tabsActiveName: 'account',
 			isTabPaneShow: true,
 			pcLayout: true,
-			pcBgi: 'https://gitee.com/sugarpeter/images/raw/master/bg1.jpg',
+			// pcBgi: 'https://gitee.com/sugarpeter/images/raw/master/bg1.jpg',
+			pcBgi: 'https://raw.githubusercontent.com/Ayuanzzz/images/main/bg1.jpg',
 			mbBgi: 'rgba(255, 255, 255, 0.99)',
 		});
 		const clientWidth = ref(document.body.clientWidth);
@@ -68,6 +69,7 @@ export default {
 			// 判断是否为手机端
 			if (clientWidth.value <= 1000) {
 				state.pcLayout = false;
+				console.log(state.pcLayout);
 			}
 		});
 		return {

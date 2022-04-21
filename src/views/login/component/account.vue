@@ -94,8 +94,8 @@ export default defineComponent({
 				userName: state.ruleForm.userName,
 				photo:
 					state.ruleForm.userName === 'admin'
-						? 'https://gitee.com/sugarpeter/images/raw/master/bear.gif'
-						: 'https://gitee.com/sugarpeter/images/raw/master/rabbit.gif',
+						? 'https://raw.githubusercontent.com/Ayuanzzz/images/main/bear.gif'
+						: 'https://raw.githubusercontent.com/Ayuanzzz/images/main/rabbit.gif',
 				time: new Date().getTime(),
 				roles: defaultRoles,
 				authBtnList: defaultAuthBtnList,
